@@ -40,11 +40,11 @@ The entrypoint.sh script you've provided is a Bash script designed to be used as
 3. Conditional Execution:
 3.1. if '[ $# -eq 0 ]'; then: This line checks if the number of positional parameters ($#) is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
 
-3.2. if '[ $# -eq 0 ]'; then: This line checks if the number of positional parameters '($#)' is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
+3.2. if [ $hash -eq 0 ]; then: This line checks if the number of positional parameters ($hash) is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
 yolo cfg=/cfg/detect.yaml: This command is executed if no arguments are passed to the script. It appears to run a program (presumably yolo for object detection tasks) with a specified configuration file (/cfg/detect.yaml). This command is a placeholder for whatever the actual yolo command might be, indicating that the script defaults to a particular configuration when no additional parameters are provided.
 else: The else block is executed if the if condition is false, meaning that there are command-line arguments passed to the script.
 
-3.3. if '[ $# -eq 0 ]'; then: This line checks if the number of positional parameters '($#)' is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
+3.3. if [ $hash -eq 0 ]; then: This line checks if the number of positional parameters ($hash) is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
 yolo $@: In this context, $@ expands to all the positional parameters passed to the script, quoted individually. It allows the script to forward all arguments to the yolo command. This line means that if any arguments are passed to the script, it will call the yolo command with those arguments, allowing the user to override the default behavior (e.g., specifying a different configuration file or additional options).
 
 
