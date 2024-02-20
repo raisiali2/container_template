@@ -33,5 +33,17 @@ A Dockerfile is a text document that contains all the commands a user could call
 12. Local execution (commented out): The commented lines regarding entrypoint.sh suggest an optional configuration for local execution, where an entry script is copied into the container and set as the entry point. This script would be executed when the container starts, allowing for custom startup behavior. This part is commented out, indicating it's an optional step that can be enabled as needed.
 13. Example Usage in Dockerfile: ARG USER_ID: This argument could be used to specify the user ID that should be used when creating a user within the container. This is useful for aligning file permissions between the container and the host system. Using ARG in a Dockerfile provides flexibility and customization options during the build process, allowing for more dynamic and configurable Docker images.
 
+## entrypoint.sh
+The entrypoint.sh script you've provided is a Bash script designed to be used as the entry point for a Docker container. It dynamically determines how to start the container's main process based on the presence of command-line arguments. Here's an explanation of each component of the script:
+1. Shebang: #!/bin/bash: This is the shebang line. It tells the operating system to use Bash to interpret the script. It's necessary because it ensures that the script is executed in a Bash environment, regardless of the invoking shell.
+2. Shellcheck Directive: shellcheck disable=SC2086: This is a directive for shellcheck, a tool that analyzes shell scripts and warns about potential issues. SC2086 is a specific warning code that advises against word splitting and globbing issues. By disabling this warning, the script author indicates that they are aware of and accept the potential risks associated with unquoted variables (like $@).
+3. Conditional Execution
+  if [ $# -eq 0 ]; then: This line checks if the number of positional parameters ($#) is equal to 0. Positional parameters are the arguments passed to the script. If this condition is true (meaning no arguments were passed to the script), the script executes the command within the if block.
+
+  yolo cfg=/cfg/detect.yaml: This command is executed if no arguments are passed to the script. It appears to run a program (presumably yolo for object detection tasks) with a specified configuration file (/cfg/detect.yaml). This command is a placeholder for whatever the actual yolo command might be, indicating that the script defaults to a particular configuration when no additional parameters are provided.
+else: The else block is executed if the if condition is false, meaning that there are command-line arguments passed to the script.
+
+  yolo $@: In this context, $@ expands to all the positional parameters passed to the script, quoted individually. It allows the script to forward all arguments to the yolo command. This line means that if any arguments are passed to the script, it will call the yolo command with those arguments, allowing the user to override the default behavior (e.g., specifying a different configuration file or additional options).
+
 
 
